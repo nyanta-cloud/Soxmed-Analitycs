@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Soxmed Analytics",
+  "version": "2.0",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "alarms"
+  ],
+  "icons": {
+    "16": "logo-soxmed.jpg",
+    "48": "logo-soxmed.jpg",
+    "128": "logo-soxmed.jpg"
+  },
+  "action": {
+    "default_popup": "analytics.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://*.instagram.com/*",
+        "https://*.tiktok.com/*"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}

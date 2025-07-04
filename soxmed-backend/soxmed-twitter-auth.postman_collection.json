@@ -1,0 +1,64 @@
+{
+  "info": {
+    "_postman_id": "soxmed-twitter-auth-collection",
+    "name": "Soxmed Twitter Auth",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Exchange Twitter OAuth Code for Access Token",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "client_id", "value": "{{TWITTER_CLIENT_ID}}" },
+            { "key": "code", "value": "<PASTE_CODE_FROM_TWITTER>" },
+            { "key": "grant_type", "value": "authorization_code" },
+            { "key": "redirect_uri", "value": "{{REDIRECT_URI}}" },
+            { "key": "code_verifier", "value": "<PASTE_CODE_VERIFIER>" }
+          ]
+        },
+        "url": {
+          "raw": "https://api.twitter.com/2/oauth2/token",
+          "protocol": "https",
+          "host": ["api", "twitter", "com"],
+          "path": ["2", "oauth2", "token"]
+        },
+        "auth": {
+          "type": "basic",
+          "basic": [
+            { "key": "username", "value": "{{TWITTER_CLIENT_ID}}" },
+            { "key": "password", "value": "{{TWITTER_CLIENT_SECRET}}" }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get User from Soxmed Backend (with JWT)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{JWT}}" }
+        ],
+        "url": {
+          "raw": "{{SOXMED_API_URL}}/api/user",
+          "host": ["{{SOXMED_API_URL}}"],
+          "path": ["api", "user"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    { "key": "TWITTER_CLIENT_ID", "value": "your-twitter-client-id" },
+    { "key": "TWITTER_CLIENT_SECRET", "value": "your-twitter-client-secret" },
+    { "key": "REDIRECT_URI", "value": "https://soxmed-analytics.vercel.app/auth-success" },
+    { "key": "SOXMED_API_URL", "value": "https://soxmed-api.vercel.app" },
+    { "key": "JWT", "value": "" }
+  ]
+}
